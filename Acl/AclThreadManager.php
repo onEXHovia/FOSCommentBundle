@@ -142,6 +142,18 @@ class AclThreadManager implements ThreadManagerInterface
     /**
      * {@inheritdoc}
      */
+    public function removeThread(ThreadInterface $thread)
+    {
+        if (!$this->threadAcl->canDelete($thread)) {
+            throw new AccessDeniedException();
+        }
+
+        $this->realManager->removeThread($thread);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function isNewThread(ThreadInterface $thread)
     {
         return $this->realManager->isNewThread($thread);

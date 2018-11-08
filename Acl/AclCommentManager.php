@@ -139,6 +139,18 @@ class AclCommentManager implements CommentManagerInterface
 
     /**
      * {@inheritdoc}
+     */
+    public function removeComment(CommentInterface $comment)
+    {
+        if (!$this->commentAcl->canDelete($comment)) {
+            throw new AccessDeniedException();
+        }
+
+        $this->realManager->removeComment($comment);
+    }
+
+    /**
+     * {@inheritdoc}
      **/
     public function findCommentById($id)
     {

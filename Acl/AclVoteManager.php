@@ -119,6 +119,18 @@ class AclVoteManager implements VoteManagerInterface
     /**
      * {@inheritdoc}
      */
+    public function removeVote(VoteInterface $vote)
+    {
+        if (!$this->commentAcl->canDelete($vote->getComment())) {
+            throw new AccessDeniedException();
+        }
+
+        $this->realManager->removeVote($vote);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function createVote(VotableCommentInterface $comment)
     {
         return $this->realManager->createVote($comment);
