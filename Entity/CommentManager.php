@@ -151,4 +151,13 @@ class CommentManager extends BaseCommentManager
         $this->em->persist($comment);
         $this->em->flush();
     }
+
+    /**
+     * @param CommentInterface $comment
+     */
+    protected function doRemoveComment(CommentInterface $comment)
+    {
+        $this->em->remove($comment);
+        $this->em->flush();
+    }
 }

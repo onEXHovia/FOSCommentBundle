@@ -109,4 +109,13 @@ class VoteManager extends BaseVoteManager
         $this->em->persist($vote);
         $this->em->flush();
     }
+
+    /**
+     * @param VoteInterface $vote
+     */
+    protected function doRemoveVote(VoteInterface $vote)
+    {
+        $this->em->remove($vote);
+        $this->em->flush();
+    }
 }

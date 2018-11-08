@@ -87,6 +87,11 @@ interface CommentManagerInterface
     public function saveComment(CommentInterface $comment);
 
     /**
+     * @param CommentInterface $comment
+     */
+    public function removeComment(CommentInterface $comment);
+
+    /**
      * Finds a comment by it's unique id.
      *
      * @param mixed $id The unique comment identifier

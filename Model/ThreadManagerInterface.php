@@ -70,6 +70,11 @@ interface ThreadManagerInterface
     public function saveThread(ThreadInterface $thread);
 
     /**
+     * @param ThreadInterface $thread
+     */
+    public function removeThread(ThreadInterface $thread);
+
+    /**
      * Checks if the thread was already persisted before, or if it's a new one.
      *
      * @param ThreadInterface $thread

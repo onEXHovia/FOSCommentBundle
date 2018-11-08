@@ -105,6 +105,20 @@ abstract class CommentManager implements CommentManagerInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function removeComment(CommentInterface $comment)
+    {
+        $event = new CommentEvent($comment);
+        $this->dispatcher->dispatch(Events::COMMENT_PRE_REMOVE, $event);
+
+        $this->doRemoveComment($comment);
+
+        $event = new CommentEvent($comment);
+        $this->dispatcher->dispatch(Events::COMMENT_POST_REMOVE, $event);
+    }
+
+    /**
      * Organises a flat array of comments into a Tree structure.
      *
      * For organising comment branches of a Tree, certain parents which
@@ -147,4 +161,9 @@ abstract class CommentManager implements CommentManagerInterface
      * @param CommentInterface $comment
      */
     abstract protected function doSaveComment(CommentInterface $comment);
+
+    /**
+     * @param CommentInterface $comment
+     */
+    abstract protected function doRemoveComment(CommentInterface $comment);
 }

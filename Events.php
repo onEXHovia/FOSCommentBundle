@@ -52,6 +52,9 @@ final class Events
      */
     const COMMENT_CREATE = 'fos_comment.comment.create';
 
+    const COMMENT_PRE_REMOVE = 'fos_comment.comment.pre_remove';
+    const COMMENT_POST_REMOVE = 'fos_comment.comment.post_remove';
+
     /**
      * The PRE_PERSIST event occurs prior to the persistence backend
      * persisting the Thread.
@@ -88,6 +91,9 @@ final class Events
      */
     const THREAD_CREATE = 'fos_comment.thread.create';
 
+    const THREAD_PRE_REMOVE = 'fos_comment.thread.pre_remove';
+    const THREAD_POST_REMOVE = 'fos_comment.thread.post_remove';
+
     /**
      * The PRE_PERSIST event occurs prior to the persistence backend
      * persisting the Vote.
@@ -123,4 +129,7 @@ final class Events
      * @var string
      */
     const VOTE_CREATE = 'fos_comment.vote.create';
+
+    const VOTE_PRE_REMOVE = 'fos_comment.vote.pre_remove';
+    const VOTE_POST_REMOVE = 'fos_comment.vote.post_remove';
 }

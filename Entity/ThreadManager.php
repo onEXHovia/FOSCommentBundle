@@ -114,4 +114,13 @@ class ThreadManager extends BaseThreadManager
         $this->em->persist($thread);
         $this->em->flush();
     }
+
+    /**
+     * @param ThreadInterface $thread
+     */
+    protected function doRemoveThread(ThreadInterface $thread)
+    {
+        $this->em->remove($thread);
+        $this->em->flush();
+    }
 }

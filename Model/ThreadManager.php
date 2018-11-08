@@ -85,6 +85,20 @@ abstract class ThreadManager implements ThreadManagerInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function removeThread(ThreadInterface $thread)
+    {
+        $event = new ThreadEvent($thread);
+        $this->dispatcher->dispatch(Events::THREAD_PRE_REMOVE, $event);
+
+        $this->doRemoveThread($thread);
+
+        $event = new ThreadEvent($thread);
+        $this->dispatcher->dispatch(Events::THREAD_POST_REMOVE, $event);
+    }
+
+    /**
      * Performs the persistence of the Thread.
      *
      * @abstract
@@ -92,4 +106,11 @@ abstract class ThreadManager implements ThreadManagerInterface
      * @param ThreadInterface $thread
      */
     abstract protected function doSaveThread(ThreadInterface $thread);
+
+    /**
+     * @abstract
+     *
+     * @param ThreadInterface $thread
+     */
+    abstract protected function doRemoveThread(ThreadInterface $thread);
 }

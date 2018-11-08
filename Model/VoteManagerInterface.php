@@ -44,6 +44,13 @@ interface VoteManagerInterface
     public function saveVote(VoteInterface $vote);
 
     /**
+     * @param VoteInterface $vote
+     *
+     * @return void
+     */
+    public function removeVote(VoteInterface $vote);
+
+    /**
      * Finds a vote by specified criteria.
      *
      * @param array $criteria
