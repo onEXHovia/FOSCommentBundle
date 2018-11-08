@@ -201,6 +201,38 @@ class AclCommentManagerTest extends TestCase
         $manager->saveComment($this->comment, $this->parent);
     }
 
+    public function testRemoveComment()
+    {
+        $expectedResult = array($this->comment);
+
+        $this->realManager->expects($this->once())
+            ->method('removeComment')
+            ->will($this->returnValue($expectedResult));
+
+        $this->threadSecurity->expects($this->once())
+            ->method('canDelete')
+            ->will($this->returnValue(true));
+
+        $manager = new AclCommentManager($this->realManager, $this->commentSecurity, $this->threadSecurity);
+        $manager->removeComment($this->comment);
+    }
+
+    /**
+     * @expectedException \Symfony\Component\Security\Core\Exception\AccessDeniedException
+     */
+    public function testRemoveCommentNoDeletePermission()
+    {
+        $this->realManager->expects($this->never())
+            ->method('removeComment');
+
+        $this->threadSecurity->expects($this->once())
+            ->method('canDelete')
+            ->will($this->returnValue(false));
+
+        $manager = new AclCommentManager($this->realManager, $this->commentSecurity, $this->threadSecurity);
+        $manager->removeComment($this->comment);
+    }
+
     /**
      * @expectedException \Symfony\Component\Security\Core\Exception\AccessDeniedException
      */

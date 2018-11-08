@@ -182,6 +182,38 @@ class AclThreadManagerTest extends TestCase
         $manager->saveThread($this->thread);
     }
 
+    public function testRemoveThread()
+    {
+        $expectedResult = array($this->thread);
+
+        $this->realManager->expects($this->once())
+            ->method('removeThread')
+            ->will($this->returnValue($expectedResult));
+
+        $this->threadSecurity->expects($this->once())
+            ->method('canDelete')
+            ->will($this->returnValue(true));
+
+        $manager = new AclThreadManager($this->realManager, $this->threadSecurity);
+        $manager->removeThread($this->thread);
+    }
+
+    /**
+     * @expectedException \Symfony\Component\Security\Core\Exception\AccessDeniedException
+     */
+    public function testRemoveThreadNoDeletePermission()
+    {
+        $this->realManager->expects($this->never())
+            ->method('removeThread');
+
+        $this->threadSecurity->expects($this->once())
+            ->method('canDelete')
+            ->will($this->returnValue(false));
+
+        $manager = new AclThreadManager($this->realManager, $this->threadSecurity);
+        $manager->removeThread($this->thread);
+    }
+
     public function testCreateThread()
     {
         $this->realManager->expects($this->once())

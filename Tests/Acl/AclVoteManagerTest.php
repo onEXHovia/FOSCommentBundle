@@ -231,6 +231,42 @@ class AclVoteManagerTest extends TestCase
         $manager->saveVote($this->vote);
     }
 
+    public function testRemoveVote()
+    {
+        $comment = $this->getMockBuilder('FOS\CommentBundle\Model\VotableCommentInterface')->getMock();
+
+        $this->realManager->expects($this->once())
+            ->method('removeVote')
+            ->with($this->vote);
+
+        $this->commentSecurity->expects($this->once())
+            ->method('canDelete')
+            ->with($comment)
+            ->will($this->returnValue(true));
+
+        $manager = new AclVoteManager($this->realManager, $this->voteSecurity, $this->commentSecurity);
+        $manager->removeVote($this->vote);
+    }
+
+    /**
+     * @expectedException \Symfony\Component\Security\Core\Exception\AccessDeniedException
+     */
+    public function testRemoveVoteNoDeletePermission()
+    {
+        $comment = $this->getMockBuilder('FOS\CommentBundle\Model\VotableCommentInterface')->getMock();
+
+        $this->realManager->expects($this->never())
+            ->method('removeVote');
+
+        $this->commentSecurity->expects($this->once())
+            ->method('canDelete')
+            ->with($comment)
+            ->will($this->returnValue(false));
+
+        $manager = new AclVoteManager($this->realManager, $this->voteSecurity, $this->commentSecurity);
+        $manager->removeVote($this->vote);
+    }
+
     public function testGetClass()
     {
         $class = 'Hello\Hello';

@@ -83,8 +83,6 @@ class VoteManagerTest extends TestCase
 
     public function testRemoveVote()
     {
-        // @todo uncomment this in 3.0 and remove the abstract class.
-        // $vote = $this->getMockBuilder('FOS\CommentBundle\Model\VoteInterface')->getMock();
         $vote = $this->getMockForAbstractClass('FOS\CommentBundle\Tests\Fixtures\AbstractVote');
 
         $this->em->expects($this->once())
