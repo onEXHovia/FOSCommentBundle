@@ -81,6 +81,22 @@ class VoteManagerTest extends TestCase
         $manager->saveVote($vote);
     }
 
+    public function testRemoveVote()
+    {
+        // @todo uncomment this in 3.0 and remove the abstract class.
+        // $vote = $this->getMockBuilder('FOS\CommentBundle\Model\VoteInterface')->getMock();
+        $vote = $this->getMockForAbstractClass('FOS\CommentBundle\Tests\Fixtures\AbstractVote');
+
+        $this->em->expects($this->once())
+            ->method('remove');
+
+        $this->em->expects($this->once())
+            ->method('flush');
+
+        $manager = new VoteManager($this->dispatcher, $this->em, $this->class);
+        $manager->removeVote($vote);
+    }
+
     public function testFindVoteBy()
     {
         // @todo uncomment this in 3.0 and remove the abstract class.

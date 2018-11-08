@@ -106,6 +106,20 @@ class CommentManagerTest extends TestCase
         $commentManager->saveComment($comment);
     }
 
+    public function testRemoveComment()
+    {
+        $comment = $this->getMockBuilder('FOS\CommentBundle\Model\CommentInterface')->getMock();
+
+        $this->em->expects($this->once())
+            ->method('remove');
+
+        $this->em->expects($this->once())
+            ->method('flush');
+
+        $commentManager = new CommentManager($this->dispatcher, $this->sortingFactory, $this->em, $this->class);
+        $commentManager->removeComment($comment);
+    }
+
     public function testGetClass()
     {
         $commentManager = new CommentManager($this->dispatcher, $this->sortingFactory, $this->em, $this->class);

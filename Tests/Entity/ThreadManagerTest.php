@@ -70,6 +70,21 @@ class ThreadManagerTest extends TestCase
         $manager->saveThread($thread);
     }
 
+    public function testRemoveThread()
+    {
+        $thread = $this->getMockBuilder('FOS\CommentBundle\Model\ThreadInterface')->getMock();
+
+        $this->em->expects($this->once())
+            ->method('remove')
+            ->with($thread);
+
+        $this->em->expects($this->once())
+            ->method('flush');
+
+        $manager = new ThreadManager($this->dispatcher, $this->em, $this->class);
+        $manager->removeThread($thread);
+    }
+
     public function testGetClass()
     {
         $manager = new ThreadManager($this->dispatcher, $this->em, $this->class);
