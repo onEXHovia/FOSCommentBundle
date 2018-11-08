@@ -52,7 +52,26 @@ final class Events
      */
     const COMMENT_CREATE = 'fos_comment.comment.create';
 
+    /**
+     * The PRE_REMOVE event occurs prior when the manager is asked to remove
+     * a instance of a Comment.
+     *
+     * The listener receives a FOS\CommentBundle\Event\CommentEvent
+     * instance.
+     *
+     * @var string
+     */
     const COMMENT_PRE_REMOVE = 'fos_comment.comment.pre_remove';
+
+    /**
+     * The POST_REMOVE event occurs after when the manager removed
+     * a instance of a Comment.
+     *
+     * The listener receives a FOS\CommentBundle\Event\CommentEvent
+     * instance.
+     *
+     * @var string
+     */
     const COMMENT_POST_REMOVE = 'fos_comment.comment.post_remove';
 
     /**
@@ -91,7 +110,26 @@ final class Events
      */
     const THREAD_CREATE = 'fos_comment.thread.create';
 
+    /**
+     * The PRE_REMOVE event occurs prior when the manager is asked to remove
+     * a instance of a Thread.
+     *
+     * The listener receives a FOS\CommentBundle\Event\ThreadEvent
+     * instance.
+     *
+     * @var string
+     */
     const THREAD_PRE_REMOVE = 'fos_comment.thread.pre_remove';
+
+    /**
+     * The POST_REMOVE event occurs after when the manager removed
+     * a instance of a Thread.
+     *
+     * The listener receives a FOS\CommentBundle\Event\ThreadEvent
+     * instance.
+     *
+     * @var string
+     */
     const THREAD_POST_REMOVE = 'fos_comment.thread.post_remove';
 
     /**
@@ -130,6 +168,25 @@ final class Events
      */
     const VOTE_CREATE = 'fos_comment.vote.create';
 
+    /**
+     * The PRE_REMOVE event occurs prior when the manager is asked to remove
+     * a instance of a Vote.
+     *
+     * The listener receives a FOS\CommentBundle\Event\VoteEvent
+     * instance.
+     *
+     * @var string
+     */
     const VOTE_PRE_REMOVE = 'fos_comment.vote.pre_remove';
+
+    /**
+     * The POST_REMOVE event occurs after when the manager removed
+     * a instance of a Vote.
+     *
+     * The listener receives a FOS\CommentBundle\Event\VoteEvent
+     * instance.
+     *
+     * @var string
+     */
     const VOTE_POST_REMOVE = 'fos_comment.vote.post_remove';
 }
